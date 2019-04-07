@@ -1,0 +1,23 @@
+<div class="container">
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Username:</label>
+        <input ngModel #username="ngModel" type="text" name="username" class="form-control" minlength="5" required />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Password:</label>
+        <input ngModel #password="ngModel" type="password" name="password" class="form-control" minlength="5" required />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <button style="float:right" type="submit" class="btn btn-primary btn-sm btn-block" [disabled]="!loginForm.valid">
+          Login  
+        </button>
+      </div>
+    </div>                    
+  </form>
+</div>
