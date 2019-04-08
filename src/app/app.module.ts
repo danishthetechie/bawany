@@ -25,6 +25,7 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 import { CustomerComponent } from './customer/customer.component';
 import { FooterComponent } from './footer/footer.component';
 import { RegisterComponent } from './register/register.component';
+import { MakeBillComponent } from './make-bill/make-bill.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { RegisterComponent } from './register/register.component';
     MyNavComponent,
     CustomerComponent,
     FooterComponent,
-    RegisterComponent
+    RegisterComponent,
+    MakeBillComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
