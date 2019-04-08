@@ -8,7 +8,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-sm">Search Customer</span>
           </div>
-          <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+          <input type="text"  [(ngModel)]="searchText" (change)="searchBox()" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         </div>
       </div>
       <div class="col-md-4">
@@ -28,21 +28,29 @@
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label>Business Title</label>
-                            <input ngModel #title="ngModel" type="text" name="title" class="form-control"/>
+                            <input ngModel #title="ngModel" type="text" name="title" class="form-control" required/>
+                            <div *ngIf="title.errors?.required">
+                              <p style="color:red"> Title is required </p>
+                          </div>
                           </div>
                           <div class="form-group col-md-6">
                             <label>Customer Name</label>
-                            <input ngModel #custname="ngModel" type="text" name="custname" class="form-control" minlength="5" required/>
+                            <input ngModel #custName="ngModel" type="text" name="custName" class="form-control" minlength="5" required/>
+                            <div *ngIf="custName.errors?.required">
+                              <p style="color:red"> Name is required </p>
+                          </div>
                           </div>
                         </div>
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label>Contact</label>
-                            <input ngModel #contact="ngModel" type="text" name="contact" class="form-control"/>
+                            <input ngModel #contact="ngModel" type="text" name="contact" class="form-control" />
+                      
                           </div>
                           <div class="form-group col-md-6">
                             <label>Reference</label>
-                            <input ngModel #reference="ngModel" type="text" name="reference" class="form-control"/>
+                            <input ngModel #reference="ngModel" type="text" name="reference" class="form-control" />
+                            
                           </div>
                         </div>
                         <div class="form-row">
@@ -68,7 +76,7 @@
 
       </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="customerList != null">
         <div class="table-responsive">
             <table class="table">
                 <caption>All Customers</caption>
@@ -83,126 +91,14 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>ABC Trading</td>
-                    <td>Ali Gul</td>
-                    <td>03122356489</td>
-                    <td>35000</td>
+                  <tr *ngFor="let cust of customerListSearch">
+                    <th scope="row">{{cust.customerId}}</th>
+                    <td>{{cust.title}}</td>
+                    <td>{{cust.customerName}}</td>
+                    <td> {{cust.customerContact}}</td>
+                    <td>{{cust.balance}}</td>
                     <td><button type="button" class="btn btn-sm btn-info">View</button></td>
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>AWS Fabrics</td>
-                    <td>M Basheer</td>
-                    <td>03145678989</td>
-                    <td>42000</td>
-                    <td><button type="button" class="btn btn-sm btn-info">View</button></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Lucky Textiles</td>
-                    <td>Ahmed Imtiaz</td>
-                    <td>03335648787</td>
-                    <td>10000</td>
-                    <td><button type="button" class="btn btn-sm btn-info">View</button></td>
-                  </tr>
-                  <tr>
-                      <th scope="row">1</th>
-                      <td>ABC Trading</td>
-                      <td>Ali Gul</td>
-                      <td>03122356489</td>
-                      <td>35000</td>
-                      <td><button type="button" class="btn btn-sm btn-info">View</button></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>AWS Fabrics</td>
-                      <td>M Basheer</td>
-                      <td>03145678989</td>
-                      <td>42000</td>
-                      <td><button type="button" class="btn btn-sm btn-info">View</button></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Lucky Textiles</td>
-                      <td>Ahmed Imtiaz</td>
-                      <td>03335648787</td>
-                      <td>10000</td>
-                      <td><button type="button" class="btn btn-sm btn-info">View</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>ABC Trading</td>
-                        <td>Ali Gul</td>
-                        <td>03122356489</td>
-                        <td>35000</td>
-                        <td><button type="button" class="btn btn-sm btn-info">View</button></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>AWS Fabrics</td>
-                        <td>M Basheer</td>
-                        <td>03145678989</td>
-                        <td>42000</td>
-                        <td><button type="button" class="btn btn-sm btn-info">View</button></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Lucky Textiles</td>
-                        <td>Ahmed Imtiaz</td>
-                        <td>03335648787</td>
-                        <td>10000</td>
-                        <td><button type="button" class="btn btn-sm btn-info">View</button></td>
-                      </tr>
-                      <tr>
-                          <th scope="row">1</th>
-                          <td>ABC Trading</td>
-                          <td>Ali Gul</td>
-                          <td>03122356489</td>
-                          <td>35000</td>
-                          <td><button type="button" class="btn btn-sm btn-info">View</button></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>AWS Fabrics</td>
-                          <td>M Basheer</td>
-                          <td>03145678989</td>
-                          <td>42000</td>
-                          <td><button type="button" class="btn btn-sm btn-info">View</button></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Lucky Textiles</td>
-                          <td>Ahmed Imtiaz</td>
-                          <td>03335648787</td>
-                          <td>10000</td>
-                          <td><button type="button" class="btn btn-sm btn-info">View</button></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>ABC Trading</td>
-                            <td>Ali Gul</td>
-                            <td>03122356489</td>
-                            <td>35000</td>
-                            <td><button type="button" class="btn btn-sm btn-info">View</button></td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>AWS Fabrics</td>
-                            <td>M Basheer</td>
-                            <td>03145678989</td>
-                            <td>42000</td>
-                            <td><button type="button" class="btn btn-sm btn-info">View</button></td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td>Lucky Textiles</td>
-                            <td>Ahmed Imtiaz</td>
-                            <td>03335648787</td>
-                            <td>10000</td>
-                            <td><button type="button" class="btn btn-sm btn-info">View</button></td>
-                          </tr>
                 </tbody>
               </table>
           </div>

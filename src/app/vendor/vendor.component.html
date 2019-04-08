@@ -1,3 +1,107 @@
-<p>
-  vendor works!
-</p>
+<app-navbar></app-navbar>
+<div class="customers">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-md-8">
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Search Customer</span>
+          </div>
+          <input type="text"  [(ngModel)]="searchText" (change)="searchBox()" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+      </div>
+      <div class="col-md-4">
+          <button type="button" class="btn btn-success btn-sm btn-block" data-toggle="modal" data-target="#addCustomer">Add Customer</button>
+
+          <div class="modal fade" id="addCustomer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Add Customer Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form #vendor="ngForm" (ngSubmit)="addVendor(vendor)">
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label>Business Title</label>
+                            <input ngModel #title="ngModel" type="text" name="title" class="form-control" required/>
+                            <div *ngIf="title.errors?.required">
+                              <p style="color:red"> Title is required </p>
+                          </div>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>Vendor Name</label>
+                            <input ngModel #vendorName="ngModel" type="text" name="vendorName" class="form-control" minlength="5" required/>
+                            <div *ngIf="vendorName.errors?.required">
+                              <p style="color:red"> Name is required </p>
+                          </div>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label>Contact</label>
+                            <input ngModel #contact="ngModel" type="text" name="contact" class="form-control" />
+                      
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>Reference</label>
+                            <input ngModel #reference="ngModel" type="text" name="reference" class="form-control" />
+                            
+                          </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                              <label>Address</label>
+                              <input ngModel #address="ngModel" type="text" name="address" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-12">
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-sm btn-block btn-success" [disabled]="!vendor.valid">Add</button>
+                              <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>                    
+                      </form>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+
+      </div>
+    </div>
+    <div class="row" *ngIf="vendorList != null">
+        <div class="table-responsive">
+            <table class="table">
+                <caption>All Customers</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Business Title</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Contact</th>
+                    <th scope="col">Balance</th>
+                    <th scope="col">Ledger</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let cust of vendorListSearch">
+                    <th scope="row">{{cust.vendorId}}</th>
+                    <td>{{cust.title}}</td>
+                    <td>{{cust.vendorName}}</td>
+                    <td> {{cust.vendorContact}}</td>
+                    <td>{{cust.balance}}</td>
+                    <td><button type="button" class="btn btn-sm btn-info">View</button></td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+    </div>
+  </div>
+</div>
