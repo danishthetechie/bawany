@@ -26,6 +26,7 @@ import { CustomerComponent } from './customer/customer.component';
 import { FooterComponent } from './footer/footer.component';
 import { RegisterComponent } from './register/register.component';
 import { MakeBillComponent } from './make-bill/make-bill.component';
+import { VendorComponent } from './vendor/vendor.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MakeBillComponent } from './make-bill/make-bill.component';
     CustomerComponent,
     FooterComponent,
     RegisterComponent,
-    MakeBillComponent
+    MakeBillComponent,
+    VendorComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
