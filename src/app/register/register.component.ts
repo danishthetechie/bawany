@@ -54,8 +54,7 @@ export class RegisterComponent implements OnInit {
 
   async registerUser(regUser:NgForm){
     let count = 0;
-    for (var key in this.allUsers) { // fetching bookings for the users                   
-      //this.book=this.dbBooking[key];
+    for (var key in this.allUsers) {
       count=this.allUsers[key].userId;
       count++;
 }

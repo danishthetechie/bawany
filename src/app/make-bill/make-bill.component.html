@@ -1,49 +1,80 @@
 <div *ngIf="username != null">
     <app-navbar></app-navbar>
     <div class="container bill-body">
+      <!-- Bill Form Starts -->
       <div class="row">
         <div class="col md-12">
-            <form #customerBill="ngForm" (ngSubmit)="createBill(customerBill)">
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="exampleFormControlSelect1">Select Customer</label>
-                          <select class="form-control" ngModel #selRole="ngModel" name="selRole">
-                            <option *ngFor="let r of allRoles[0]" value="{{r.roleTitle}}">{{r.roleTitle}}</option>
-                          </select>
-                      </div>
-                  <div class="form-group col-md-6">
-                      <label>Email:</label>
-                      <input ngModel #email="ngModel" type="email" name="email" class="form-control" minlength="5" required />
-                    </div>
+          <form #customerBill="ngForm" (ngSubmit)="createBill(customerBill)">
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <label>Bill #</label>
+                <input [(ngModel)] = "billNo" type="text" name="billNo" [value]="billNo" class="form-control" disabled />
+              </div>
+              <div class="form-group col-md-5">
+                <label>Select Customer</label>
+                <input class="form-control" [(ngModel)]="selected" [typeahead]="allCustomers.customerName" name="customer">
+              </div>
+              <div class="form-group col-md-2">
+                <label>Date</label>
+                <input [(ngModel)] = "formatDate" type="text" name="currentDate" class="form-control" [value]="formatDate" disabled />
+              </div>
+              <div class="form-group col-md-3">
+                  <label>Total Amount</label>
+                  <input type="number" class="form-control" [(ngModel)]="totalAmount" name="total" [value] = "totalAmount" disabled />
                 </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label>Password:</label>
-                    <input ngModel #password="ngModel" type="password" name="password" class="form-control" minlength="5" required />
-                  </div>
-                  <div class="form-group col-md-6">
-                      <label>Contact:</label>
-                      <input ngModel #contact="ngModel" type="text" name="contact" class="form-control" minlength="5" required />
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="exampleFormControlSelect1">Select Roles</label>
-                      <select class="form-control" ngModel #selRole="ngModel" name="selRole">
-                        <option *ngFor="let r of allRoles[0]" value="{{r.roleTitle}}">{{r.roleTitle}}</option>
-                      </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <button style="float:right" type="submit" class="btn btn-primary btn-sm btn-block" [disabled]="!customerBill.valid">
-                      Register User  
-                    </button>
-                  </div>
-                </div>                    
-              </form>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label>Product</label>
+                <input ngModel  #product="ngModel" type="text" name="product" class="form-control" minlength="5" required />
+              </div>
+              <div class="form-group col-md-2">
+                <label>Quantity</label>
+                <input ngModel  #qty="ngModel" type="number" name="qty" class="form-control" required />
+              </div>
+              <div class="form-group col-md-2">
+                <label>Rate</label>
+                <input ngModel  #rate="ngModel" type="number" name="rate" class="form-control" required />
+              </div>
+              <div class="form-group col-md-4">
+                <label></label>
+                <button type="submit" class="btn btn-success btn-lg btn-block" [disabled]="!customerBill.valid">
+                  Add in Bill  
+                </button>
+              </div>
+            </div>
+            <div class="form-row">
+            </div>                    
+          </form>
         </div>
-
       </div>
 
-    </div>
-</div>
+      <!--Bill Details Table -->
+      <div class="row">
+        <div class="col-md-12 table-responsive">
+          <table class="table">
+            <caption>Bill Items</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Product</th>
+                  <th scope="col">Qty</th>
+                  <th scope="col">Rate</th>
+                  <th scope="col">Subtotal</th>
+                  <th scope="col">Delete Item</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let d of detailsArray">
+                  <td>{{d.product}}</td>
+                  <td>{{d.qty}}</td>
+                  <td>{{d.rate}}</td>
+                  <td>{{d.subtotal}}</td>
+                  <td><button type="button" class="btn btn-sm btn-danger" (click)="deleteRow(d.serial)">Remove</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+  </div>
 

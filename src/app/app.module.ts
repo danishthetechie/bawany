@@ -21,12 +21,14 @@ import { HomeLoginComponent } from './home-login/home-login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MyNavComponent } from './my-nav/my-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatAutocompleteModule } from '@angular/material';
 import { CustomerComponent } from './customer/customer.component';
 import { FooterComponent } from './footer/footer.component';
 import { RegisterComponent } from './register/register.component';
 import { MakeBillComponent } from './make-bill/make-bill.component';
 import { VendorComponent } from './vendor/vendor.component';
+
+import { TypeaheadModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { VendorComponent } from './vendor/vendor.component';
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,ReactiveFormsModule,
+    TypeaheadModule.forRoot(),
     ModalModule.forRoot(),
     ProgressbarModule.forRoot(),
     TabsModule.forRoot(),
@@ -63,7 +66,8 @@ import { VendorComponent } from './vendor/vendor.component';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
