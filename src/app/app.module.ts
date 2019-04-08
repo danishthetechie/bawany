@@ -11,7 +11,9 @@ import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
-
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { environment } from '../environments/environment';
 
 
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -22,6 +24,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { CustomerComponent } from './customer/customer.component';
 import { FooterComponent } from './footer/footer.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -31,9 +34,12 @@ import { FooterComponent } from './footer/footer.component';
     NavbarComponent,
     MyNavComponent,
     CustomerComponent,
-    FooterComponent
+    FooterComponent,
+    RegisterComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

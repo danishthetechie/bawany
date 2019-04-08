@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="row">
+      <div class="col-md-4">
+          <form #regRole="ngForm" (ngSubmit)="registerRole(regRole)">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Role ID:</label>
+                  <input ngModel #roleid="ngModel" type="number" name="roleid" class="form-control" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Role Title:</label>
+                  <input ngModel #roletitle="ngModel" type="text" name="roletitle" class="form-control" minlength="5" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <button style="float:right" type="submit" class="btn btn-primary btn-sm btn-block" [disabled]="!regRole.valid">
+                    Login  
+                  </button>
+                </div>
+              </div>                    
+            </form>
+      </div>
+      <div class="col-md-8">
+          <form #regUser="ngForm" (ngSubmit)="registerUser(regUser)">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Username:</label>
+                  <input ngModel #username="ngModel" type="text" name="username" class="form-control" minlength="5" required />
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Email:</label>
+                    <input ngModel #email="ngModel" type="email" name="email" class="form-control" minlength="5" required />
+                  </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Password:</label>
+                  <input ngModel #password="ngModel" type="password" name="password" class="form-control" minlength="5" required />
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Contact:</label>
+                    <input ngModel #contact="ngModel" type="text" name="contact" class="form-control" minlength="5" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="exampleFormControlSelect1">Select Roles</label>
+                    <select class="form-control" ngModel #selRole="ngModel" name="selRole">
+                      <option *ngFor="let r of allRoles[0]" value="{{r.roleTitle}}">{{r.roleTitle}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <button style="float:right" type="submit" class="btn btn-primary btn-sm btn-block" [disabled]="!regUser.valid">
+                    Register User  
+                  </button>
+                </div>
+              </div>                    
+            </form>
+      </div>
+  </div>
+  
+  
+</div>
