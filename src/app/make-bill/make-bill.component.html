@@ -12,7 +12,7 @@
               </div>
               <div class="form-group col-md-5">
                 <label>Select Customer</label>
-                <input class="form-control" [(ngModel)]="selected" [typeahead]="allCustomers.customerName" name="customer">
+                <input class="form-control" [(ngModel)]="selected" [typeahead]="custName" name="customer" autocomplete="off">
               </div>
               <div class="form-group col-md-2">
                 <label>Date</label>
@@ -66,7 +66,7 @@
               <tbody>
                 <tr *ngFor="let d of detailsArray">
                   <td>{{d.product}}</td>
-                  <td>{{d.qty}}</td>
+                  <td>{{d.quantity}}</td>
                   <td>{{d.rate}}</td>
                   <td>{{d.subtotal}}</td>
                   <td><button type="button" class="btn btn-sm btn-danger" (click)="deleteRow(d.serial)">Remove</button></td>
@@ -75,6 +75,17 @@
             </table>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group col-md-12">
+              <button type="submit" class="btn btn-info btn-md btn-block" (click)="finalBill()">
+                Submit  
+              </button>
+            </div>
+          </div>
+        </div>
+
       </div>
   </div>
 

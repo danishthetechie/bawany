@@ -33,7 +33,10 @@ export class CustomerComponent implements OnInit {
                 title:this.customerList[cust].title,
                 customerName:this.customerList[cust].customerName,
                 customerContact:this.customerList[cust].customerContact,
-                balance:this.customerList[cust].balance});
+                balance:this.customerList[cust].balance
+        });
+                
+
       }
       console.log(this.customerListSearch);
       
@@ -62,6 +65,9 @@ export class CustomerComponent implements OnInit {
     if(count == 0){
       count = 1;
     }
+    let billDetail=[{product:"",quantity:0,rate:0,subTotal:0}];
+    let chequelDetail={chequeNo:"",Bank:""};
+   
     this.db.list('/customers').push({
       customerId: count,
       title:customer.value.title,
@@ -70,6 +76,8 @@ export class CustomerComponent implements OnInit {
       customerAddress: customer.value.address,
       reference: customer.value.reference,
       balance:0,
+      bills:[{billid:0,billdate:"",totalAmount:0,billDetail:billDetail}],
+      payments:[{payid:0,paydate:"",payAmount:0,chequelDetail:chequelDetail}],  
       addedBy: this.username,
       addDate: this.date
     });

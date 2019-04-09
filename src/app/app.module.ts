@@ -14,6 +14,8 @@ import { RouterModule } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
+import { CustomerServiceService } from './customer-service.service'; 
+
 
 
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -69,7 +71,7 @@ import { TypeaheadModule } from 'ngx-bootstrap';
     MatListModule,
     MatAutocompleteModule
   ],
-  providers: [],
+  providers: [CustomerServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
