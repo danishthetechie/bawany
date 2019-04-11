@@ -31,6 +31,7 @@ import { MakeBillComponent } from './make-bill/make-bill.component';
 import { VendorComponent } from './vendor/vendor.component';
 
 import { TypeaheadModule } from 'ngx-bootstrap';
+import { MakeCustomerPaymentComponent } from './make-customer-payment/make-customer-payment.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { TypeaheadModule } from 'ngx-bootstrap';
     FooterComponent,
     RegisterComponent,
     MakeBillComponent,
-    VendorComponent
+    VendorComponent,
+    MakeCustomerPaymentComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

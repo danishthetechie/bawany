@@ -6,6 +6,7 @@ import { CustomerComponent } from './customer/customer.component';
 import { RegisterComponent } from './register/register.component';
 import { MakeBillComponent } from './make-bill/make-bill.component';
 import { VendorComponent } from './vendor/vendor.component';
+import { MakeCustomerPaymentComponent } from './make-customer-payment/make-customer-payment.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'customer', component: CustomerComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'make-bill', component: MakeBillComponent },
-  { path: 'vendor', component: VendorComponent }
+  { path: 'vendor', component: VendorComponent },
+  { path: 'make-customer-payment', component: MakeCustomerPaymentComponent },
 
 ];
 

@@ -75,9 +75,7 @@ export class CustomerComponent implements OnInit {
       customerContact: customer.value.contact,
       customerAddress: customer.value.address,
       reference: customer.value.reference,
-      balance:0,
-      bills:[{billid:0,billdate:"",totalAmount:0,billDetail:billDetail}],
-      payments:[{payid:0,paydate:"",payAmount:0,chequelDetail:chequelDetail}],  
+      balance:0,  
       addedBy: this.username,
       addDate: this.date
     });

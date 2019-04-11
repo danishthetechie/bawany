@@ -17,6 +17,7 @@ export class MakeBillComponent implements OnInit {
   detailsArray = [];
   billDetailId = 0;
   currentDate;
+  customerBalance;
   formatDate;
   role;
   username;
@@ -26,7 +27,7 @@ export class MakeBillComponent implements OnInit {
 
     this.role = localStorage.getItem('role');
     this.username = localStorage.getItem('username');
-
+    console.log(this.detailsArray);
     //getting all customers
     db.list('/customers')
     .valueChanges()
@@ -60,7 +61,7 @@ export class MakeBillComponent implements OnInit {
   async createBill(custBill:NgForm){
     this.billNo=this.getNewBillId();
     if(custBill.value.customer != "" && custBill.value.qty != "" && custBill.value.product != "" && custBill.value.rate != ""){
-      this.detailsArray.push({serial: this.billDetailId, product:custBill.value.product, quantity:custBill.value.qty,
+      this.detailsArray.push({serial: this.billDetailId, than:custBill.value.than, product:custBill.value.product, quantity:custBill.value.qty,
                              rate:custBill.value.rate, subtotal:(custBill.value.qty * custBill.value.rate)});
       this.billDetailId++;
       console.log(this.detailsArray);
@@ -108,10 +109,15 @@ export class MakeBillComponent implements OnInit {
         }
       }
       custId= +id; //parse into Int
+      this.customerBalance = this.getBalance(custId); //get balance to update it
+      console.log(this.customerBalance);
+      this.customerBalance += this.totalAmount;
       let key = this.getCustomerKey(custId); //get Customer Key
       firebase.database().ref('/customers/'+key).child("bills").push(bills); //push bill
+      this.db.object('customers/' + key).update({balance: this.customerBalance}); //update balance
+
     }
-    location.reload();
+    //location.reload();
   }
 
 
@@ -119,13 +125,23 @@ export class MakeBillComponent implements OnInit {
     let data$;
     this.db.database.ref('customers').orderByChild('customerId').equalTo(id).on("value", function(snapshot) {
       console.log(snapshot.val());
-      
       snapshot.forEach(function(data) {
           console.log(data.key);
           data$ = data.key;
       });
     });
     return data$;
+  }
+
+  getBalance(id){
+    for(let c of this.allCustomers){
+      if(c.customerId == id){
+        console.log(c.customerId + " == " + id);
+        console.log(c.balance);
+        return c.balance;
+      }
+    }
+    return 0;
   }
   
 
