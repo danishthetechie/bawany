@@ -38,7 +38,7 @@ export class MakeBillComponent implements OnInit {
       }
     });
     this.currentDate = new Date();
-    this.formatDate= this.currentDate.toISOString().substring(0, 10);
+    //this.formatDate= this.currentDate.toISOString().substring(0, 10);
     
     
    }
@@ -98,7 +98,8 @@ export class MakeBillComponent implements OnInit {
     this.billNo=this.getNewBillId();
 
     if(this.detailsArray != null){
-      bills = {billDate: this.formatDate, billid: this.billNo, totalAmount: this.totalAmount, billDetail: this.detailsArray};
+      console.log(this.currentDate);
+      bills = {billDate: this.currentDate, billid: this.billNo, totalAmount: this.totalAmount, billDetail: this.detailsArray};
       //get Customer ID
       for(let i=0;i<this.selected.length;i++){
         if(this.selected[i]!= '-'){
