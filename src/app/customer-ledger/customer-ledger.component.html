@@ -1,54 +1,57 @@
 <div *ngIf="username != null">
   <app-navbar></app-navbar>
-  <div class="container ledger-body">
-    <h2>Customer Ledger</h2>
-    <div class="row">
-        <form class="col-md-12" #searchCustomerForm="ngForm" (ngSubmit)="searchCustomer(searchCustomerForm)">
-            <div class="form-row">
-              <div class="form-group col-md-8">
-                  <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroup-sizing-sm">Search Customer</span>
+  <body class="ledger">
+    <div class="container">
+      <h2>Customer Ledger</h2>
+      <div class="row">
+          <form class="col-md-12" #searchCustomerForm="ngForm" (ngSubmit)="searchCustomer(searchCustomerForm)">
+              <div class="form-row">
+                <div class="form-group col-md-8">
+                    <div class="input-group input-group-sm mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Search Customer</span>
+                      </div>
+                      <input class="form-control" [(ngModel)]="selected" [typeahead]="custName" name="customer" autocomplete="off" required>
                     </div>
-                    <input class="form-control" [(ngModel)]="selected" [typeahead]="custName" name="customer" autocomplete="off" required>
                   </div>
-                </div>
-                <div class="form-group col-md-4">
-                  <button type="submit" class="btn btn-success btn-sm btn-block" [disabled]="!searchCustomerForm.valid">
-                    Search  
-                  </button>
-                </div>
-            </div>
-        </form>
-    </div>
-
-
-    <div class="row">
-      <div class=" table col-md-12">
-          <table class="table">
-              <caption>Customer Ledger</caption>
-              <thead>
-                <tr>
-                  <th scope="col">Date</th>
-                  <th scope="col">Bill ID</th>
-                  <th scope="col">Details</th>
-                  <th scope="col">Credit</th>
-                  <th scope="col">Debit</th>
-                  <th scope="col">Balance</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let det of ledger">
-                  <th scope="row">{{det.date}}</th>
-                  <td>{{det.billNo}}</td>
-                  <td>{{det.details}}</td>
-                  <td>{{det.credit}}</td>
-                  <td>{{det.debit}}</td>
-                  <td>{{det.balance}}</td>
-                </tr>
-              </tbody>
-            </table>
+                  <div class="form-group col-md-4">
+                    <button type="submit" class="btn btn-success btn-sm btn-block" [disabled]="!searchCustomerForm.valid">
+                      Search  
+                    </button>
+                  </div>
+              </div>
+          </form>
+      </div>
+  
+  
+      <div class="row">
+        <div class="table-responsive">
+            <table class="table">
+                <caption>Customer Ledger</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Bill ID</th>
+                    <th scope="col">Details</th>
+                    <th scope="col">Credit</th>
+                    <th scope="col">Debit</th>
+                    <th scope="col">Balance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let det of ledger">
+                    <th scope="row">{{det.date}}</th>
+                    <td>{{det.billNo}}</td>
+                    <td>{{det.details}}</td>
+                    <td>{{det.credit}}</td>
+                    <td>{{det.debit}}</td>
+                    <td>{{det.balance}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
       </div>
     </div>
-  </div>
+  </body>
+  <app-footer></app-footer>
 </div>

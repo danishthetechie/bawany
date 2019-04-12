@@ -1,0 +1,19 @@
+
+/* .customers{
+    padding-top: 20px;
+    padding: 20px;
+} */
+
+th{
+    font-size: 15px;
+    padding: 2px;
+    
+}
+td{
+    font-size: 15px;
+    padding: 2px;
+}
+td > button{
+    font-size: 12px;
+
+}

@@ -1,11 +1,25 @@
 .customers{
+    background-image:url('../../assets/img/backdrop.jpg');
+    padding-top: 1px;
+    padding-bottom: 120px;
+    position: relative;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: top;  
+    background-size: 100% 120%;
     padding-top: 20px;
     padding: 20px;
-}
+  }
+
+/* .customers{
+    padding-top: 20px;
+    padding: 20px;
+} */
 
 th{
     font-size: 15px;
     padding: 2px;
+    
 }
 td{
     font-size: 15px;
