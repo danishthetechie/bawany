@@ -32,11 +32,11 @@ export class MakeCustomerPaymentComponent implements OnInit {
   //Bill details
   billsArray = [];
 
-  //
+  //For Fields
   totalAmount=0;
   remainingAmount=0;
   paymentNo=0;
-
+  amountPaid=0;
   //customer
   customerBalance;
 
@@ -76,7 +76,7 @@ export class MakeCustomerPaymentComponent implements OnInit {
 
   
   getBalance(){
-
+    this.billsArray=[];
     console.log(this.selected);
       //getting Paymet ID
       this.paymentNo=this. getNewPaymentId();
@@ -114,7 +114,7 @@ export class MakeCustomerPaymentComponent implements OnInit {
       chequeDate:payment.value.chequeDate,
       payDetails:payment.value.payDetails
     };
-    this.remainingAmount=this.totalAmount-payment.value.amountPaid; 
+   
     let id= this.getCustomerId();
     let custId= +id; //parse into Int
     let key = this.getCustomerKey(custId); //get Customer Key
@@ -126,6 +126,8 @@ export class MakeCustomerPaymentComponent implements OnInit {
     this.db.object('customers/' + key).update({balance: this.totalAmount});
     //alert(payment.value.amountRemain);
     this.router.navigate(['dashboard']);
+
+    
   }
 
   //get Customer ID from TypeHead
@@ -155,7 +157,9 @@ export class MakeCustomerPaymentComponent implements OnInit {
     }
     
     //get 
-    getRemainingAmount(){
-      
+    getRemainingAmount(amountPaid){
+    
+      this.remainingAmount=this.totalAmount-amountPaid;
+
     }
 }
