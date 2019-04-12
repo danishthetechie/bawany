@@ -3,6 +3,8 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { NgForm } from '@angular/forms';
 import { CustomerServiceService } from '../customer-service.service' 
 import * as firebase from 'firebase';
+import { DatePipe } from '@angular/common';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-make-bill',
@@ -23,7 +25,7 @@ export class MakeBillComponent implements OnInit {
   username;
   totalAmount;
   
-  constructor(public customerService:CustomerServiceService,public db: AngularFireDatabase) {
+  constructor(public datepipe: DatePipe, public customerService:CustomerServiceService,public db: AngularFireDatabase) {
 
     this.role = localStorage.getItem('role');
     this.username = localStorage.getItem('username');
@@ -38,7 +40,8 @@ export class MakeBillComponent implements OnInit {
       }
     });
     this.currentDate = new Date();
-    //this.formatDate= this.currentDate.toISOString().substring(0, 10);
+    this.formatDate =this.datepipe.transform(this.currentDate, 'yyyy-MM-dd');
+
     
     
    }
@@ -91,6 +94,7 @@ export class MakeBillComponent implements OnInit {
 
 
   async finalBill(){
+    let custKey: any;
     let id="";
     let custId=0;
     let bills;
@@ -98,8 +102,7 @@ export class MakeBillComponent implements OnInit {
     this.billNo=this.getNewBillId();
 
     if(this.detailsArray != null){
-      console.log(this.currentDate);
-      bills = {billDate: this.currentDate, billid: this.billNo, totalAmount: this.totalAmount, billDetail: this.detailsArray};
+      bills = {billDate: this.formatDate, billid: this.billNo, totalAmount: this.totalAmount, billDetail: this.detailsArray};
       //get Customer ID
       for(let i=0;i<this.selected.length;i++){
         if(this.selected[i]!= '-'){
@@ -110,15 +113,48 @@ export class MakeBillComponent implements OnInit {
         }
       }
       custId= +id; //parse into Int
-      this.customerBalance = this.getBalance(custId); //get balance to update it
+      if(custId != null){
+        this.customerBalance = this.getBalance(custId); //get balance to update it
       console.log(this.customerBalance);
       this.customerBalance += this.totalAmount;
-      let key = this.getCustomerKey(custId); //get Customer Key
-      firebase.database().ref('/customers/'+key).child("bills").push(bills); //push bill
-      this.db.object('customers/' + key).update({balance: this.customerBalance}); //update balance
+      custKey = this.getCustomerKey(custId); //get Customer Key
+
+      }
+      
+      try{
+        console.log(custKey);
+        firebase.database().ref('/customers/'+custKey).child("bills").push(bills); //push bill
+        this.db.object('customers/' + custKey).update({balance: this.customerBalance}); //update balance
+      }catch(error){
+        let count = 0;
+        for (var key in this.allCustomers) { // fetching bookings for the users                   
+          count=this.allCustomers[key].customerId;
+          count++;
+        }
+        if(count == 0){
+          count = 1;
+        }
+
+        this.db.list('/customers').push({
+          customerId: count,
+          title:"",
+          customerName: this.selected,
+          customerContact: "",
+          customerAddress: "",
+          reference: "",
+          balance:this.customerBalance,  
+          addedBy: this.username,
+          addDate: this.formatDate,
+        });
+        custKey = this.getCustomerKey(count); //get Customer Key
+        this.finalBill();
+
+      }
+      
+      
 
     }
-    //location.reload();
+    location.reload();
   }
 
 

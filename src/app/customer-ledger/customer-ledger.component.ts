@@ -55,15 +55,20 @@ export class CustomerLedgerComponent implements OnInit {
       }
       custId= +id; //parse into Int
       for(let cust in this.allCustomers){
+        console.log(this.allCustomers[cust].customerId+ " != " + custId);
         if(this.allCustomers[cust].customerId == custId){
+          console.log(this.allCustomers[cust].customerId+ " == " + custId);
           console.log(this.allCustomers[cust].bills);
+          console.log(this.allCustomers[cust].payments);
           for(let b in this.allCustomers[cust].bills){
+            console.log(this.allCustomers[cust].bills[b].billDate);
             this.ledger.push({ date: this.allCustomers[cust].bills[b].billDate,
               billNo: this.allCustomers[cust].bills[b].billid,
               details: "", 
               credit: this.allCustomers[cust].bills[b].totalAmount, 
               debit:""});    
           }
+          console.log(this.ledger);
           for(let p in this.allCustomers[cust].payments){
             this.ledger.push({ date: this.allCustomers[cust].payments[p].payDate, 
               billNo: "",
@@ -74,8 +79,6 @@ export class CustomerLedgerComponent implements OnInit {
           }
         }
       }
-      console.log(this.ledger);
-      this.ledger.sort((a,b) => a.date.localeCompare(b.date));
       console.log(this.ledger);
     }
   }

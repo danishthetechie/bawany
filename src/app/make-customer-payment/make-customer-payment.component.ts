@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { CustomerServiceService } from '../customer-service.service' 
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-make-customer-payment',
   templateUrl: './make-customer-payment.component.html',
@@ -40,7 +41,7 @@ export class MakeCustomerPaymentComponent implements OnInit {
   //customer
   customerBalance;
 
-  constructor(private router: Router,public customerService:CustomerServiceService,public db: AngularFireDatabase) { 
+  constructor(public datepipe: DatePipe, private router: Router,public customerService:CustomerServiceService,public db: AngularFireDatabase) { 
     this.role = localStorage.getItem('role');
     this.username = localStorage.getItem('username');
 
@@ -56,7 +57,7 @@ export class MakeCustomerPaymentComponent implements OnInit {
 
      //get Current Date
      this.currentDate = new Date();
-     this.formatDate= this.currentDate.toISOString().substring(0, 10);
+     this.formatDate =this.datepipe.transform(this.currentDate, 'yyyy-MM-dd');
   }
 
   ngOnInit() {

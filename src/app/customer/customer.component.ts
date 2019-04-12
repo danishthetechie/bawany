@@ -55,7 +55,7 @@ export class CustomerComponent implements OnInit {
     let count = 0;
     if(this.customerList !=null){
             for (var key in this.customerList) { // fetching bookings for the users                   
-              //this.book=this.dbBooking[key];
+              
               count=this.customerList[key].customerId;
               
               count++;
@@ -65,9 +65,6 @@ export class CustomerComponent implements OnInit {
     if(count == 0){
       count = 1;
     }
-    let billDetail=[{product:"",quantity:0,rate:0,subTotal:0}];
-    let chequelDetail={chequeNo:"",Bank:""};
-   
     this.db.list('/customers').push({
       customerId: count,
       title:customer.value.title,

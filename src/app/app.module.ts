@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap';
@@ -77,7 +77,7 @@ import { VendorLedgerComponent } from './vendor-ledger/vendor-ledger.component';
     MatListModule,
     MatAutocompleteModule
   ],
-  providers: [CustomerServiceService],
+  providers: [CustomerServiceService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
