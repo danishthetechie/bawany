@@ -57,7 +57,7 @@ export class MakeCustomerPaymentComponent implements OnInit {
 
      //get Current Date
      this.currentDate = new Date();
-     this.formatDate =this.datepipe.transform(this.currentDate, 'yyyy-MM-dd');
+     this.formatDate =this.datepipe.transform(this.currentDate, 'yyyy-MM-dd hh:mm:ss');
   }
 
   ngOnInit() {
@@ -96,7 +96,7 @@ export class MakeCustomerPaymentComponent implements OnInit {
               });
           }
           this.totalAmount=this.allCustomers[c].balance;
-          
+          console.log(this.totalAmount);
         }
       }
       console.log(this.billsArray);

@@ -40,7 +40,7 @@ export class MakeBillComponent implements OnInit {
       }
     });
     this.currentDate = new Date();
-    this.formatDate =this.datepipe.transform(this.currentDate, 'yyyy-MM-dd');
+    this.formatDate =this.datepipe.transform(this.currentDate, 'yyyy-MM-dd hh:mm:ss');
 
     
     
@@ -112,20 +112,19 @@ export class MakeBillComponent implements OnInit {
           break;
         }
       }
-      custId= +id; //parse into Int
-      if(custId != null){
-        this.customerBalance = this.getBalance(custId); //get balance to update it
-      console.log(this.customerBalance);
-      this.customerBalance += this.totalAmount;
-      custKey = this.getCustomerKey(custId); //get Customer Key
+      custId= +id;
+      console.log(custId+"-"+id);
+      if(!isNaN(custId)){
+          
+          //custId= +id; //parse into Int
+          this.customerBalance = this.getBalance(custId); //get balance to update it
+          console.log(this.customerBalance);
+          this.customerBalance += this.totalAmount;
+          custKey = this.getCustomerKey(custId); //get Customer Key
 
       }
-      
-      try{
-        console.log(custKey);
-        firebase.database().ref('/customers/'+custKey).child("bills").push(bills); //push bill
-        this.db.object('customers/' + custKey).update({balance: this.customerBalance}); //update balance
-      }catch(error){
+      else{
+        alert("sadas");
         let count = 0;
         for (var key in this.allCustomers) { // fetching bookings for the users                   
           count=this.allCustomers[key].customerId;
@@ -142,12 +141,43 @@ export class MakeBillComponent implements OnInit {
           customerContact: "",
           customerAddress: "",
           reference: "",
-          balance:this.customerBalance,  
+          balance:this.totalAmount,  
           addedBy: this.username,
           addDate: this.formatDate,
         });
-        custKey = this.getCustomerKey(count); //get Customer Key
-        this.finalBill();
+        console.log(count);
+        custKey = this.getCustomerKey(count);
+      }
+      
+      try{
+        console.log(custKey);
+        firebase.database().ref('/customers/'+custKey).child("bills").push(bills); //push bill
+        this.db.object('customers/' + custKey).update({balance: this.customerBalance}); //update balance
+      }catch(error){
+        console.log(error);
+        // let count = 0;
+        // for (var key in this.allCustomers) { // fetching bookings for the users                   
+        //   count=this.allCustomers[key].customerId;
+        //   count++;
+        // }
+        // if(count == 0){
+        //   count = 1;
+        // }
+
+        // this.db.list('/customers').push({
+        //   customerId: count,
+        //   title:"",
+        //   customerName: this.selected,
+        //   customerContact: "",
+        //   customerAddress: "",
+        //   reference: "",
+        //   balance:this.customerBalance,  
+        //   addedBy: this.username,
+        //   addDate: this.formatDate,
+        // });
+        // console.log(count);
+        // custKey = this.getCustomerKey(count); //get Customer Key
+        // this.finalBill();
 
       }
       

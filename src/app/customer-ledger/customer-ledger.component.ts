@@ -80,6 +80,11 @@ export class CustomerLedgerComponent implements OnInit {
         }
       }
       console.log(this.ledger);
+          this.ledger.sort((a, b) => {
+
+            return new Date(b.date)-new Date(a.date);
+
+          });
     }
   }
 
