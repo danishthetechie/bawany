@@ -20,7 +20,7 @@ export class CustomerLedgerComponent implements OnInit {
   selected: string;
   custName = [];
   currentCustomer;
-  ledger = [];
+  ledger:any = [];
 
   constructor(public customerService:CustomerServiceService,public db: AngularFireDatabase) {
     this.role = localStorage.getItem('role');
@@ -39,7 +39,7 @@ export class CustomerLedgerComponent implements OnInit {
   }
 
   async searchCustomer(searchCustomerForm:NgForm){
-    this.ledger = [];
+    this.ledger= [];
     let id="";
     let custId=0;
     if(searchCustomerForm.value.customer != ""){
@@ -82,7 +82,8 @@ export class CustomerLedgerComponent implements OnInit {
       console.log(this.ledger);
           this.ledger.sort((a, b) => {
 
-            return new Date(b.date)-new Date(a.date);
+            return (b.date) - (a.date);
+            //return new Date(b.date)- new Date(a.date);
 
           });
     }

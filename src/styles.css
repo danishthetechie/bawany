@@ -2,3 +2,28 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* .btn-primary{
+    background-color: #1F5673;
+    color: white;
+}
+
+.btn-secondary{
+    background-color: #A6D8D4;
+    color: black;
+}
+
+.btn-success{
+    background-color: #FFCF56;
+    color: black;
+}
+
+.btn-warning{
+    background-color: #DB5461;
+    color: black;
+}
+
+.btn-danger{
+    background-color: #1F363D;
+    color: white;
+} */

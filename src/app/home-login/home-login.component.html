@@ -1,23 +1,25 @@
-<div class="container">
-  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label>Email:</label>
-        <input ngModel #username="ngModel" type="username" name="username" class="form-control" minlength="5" required />
+<body class="image">
+    <div id="card">
+      <div id="card-content">
+        <div id="card-title">
+          <h2>LOGIN</h2>
+        </div>
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+          <label for="user-email" style="padding-top:13px">
+              &nbsp;Username
+            </label>
+          <input id="user-email" class="form-content" ngModel #username="ngModel" type="text" name="username" autocomplete="off" minlength="5" required />
+          <div class="form-border"></div>
+          <label for="user-password" style="padding-top:22px">&nbsp;Password
+            </label>
+          <input id="user-password" ngModel #password="ngModel" class="form-content" type="password" name="password" minlength="5" required />
+          <div class="form-border"></div>
+          <button id="submit-btn" style="float:right" type="submit" class="btn btn-primary btn-sm btn-block" [disabled]="!loginForm.valid">
+            Login  
+          </button>
+        </form>
       </div>
     </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label>Password:</label>
-        <input ngModel #password="ngModel" type="password" name="password" class="form-control" minlength="5" required />
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <button style="float:right" type="submit" class="btn btn-primary btn-sm btn-block" [disabled]="!loginForm.valid">
-          Login  
-        </button>
-      </div>
-    </div>                    
-  </form>
-</div>
+</body>
+<app-footer></app-footer>
+

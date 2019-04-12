@@ -1,0 +1,19 @@
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background: rgb(36, 36, 36);
+}
+.credits p{
+    color: white;
+    font-size: 10px;
+    float:left;
+}
+
+.copyrights p{
+    color: white;
+    font-size: 10px;
+    float:right;
+}
